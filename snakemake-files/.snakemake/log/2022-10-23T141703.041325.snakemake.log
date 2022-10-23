@@ -1,0 +1,25 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job              count    min threads    max threads
+-------------  -------  -------------  -------------
+samtools_view        1              1              1
+total                1              1              1
+
+Select jobs to execute...
+
+[Sun Oct 23 14:17:03 2022]
+rule samtools_view:
+    input: ../minimap2-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.sam
+    output: ../samtools-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.bam
+    jobid: 0
+    reason: Missing output files: ../samtools-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.bam
+    wildcards: ref_sample=GCF_000005845.2_ASM584v2_genomic, sample=SRR12717711
+    resources: tmpdir=/tmp
+
+[Sun Oct 23 14:17:03 2022]
+Finished job 0.
+1 of 1 steps (100%) done
+Complete log: .snakemake/log/2022-10-23T141703.041325.snakemake.log

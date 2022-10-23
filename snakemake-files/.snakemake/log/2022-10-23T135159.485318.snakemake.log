@@ -1,0 +1,6 @@
+Building DAG of jobs...
+MissingInputException in rule minimap2_mapping  in line 8 of /home/ars/nsu/bioinformatics/snakemake-files/Snakefile:
+Missing input files for rule minimap2_mapping:
+    output: ../minimap2-results/alignment.sam
+    affected files:
+        ../minimap2-results/ref.mmi../data/SRR12717711.fastq

@@ -1,0 +1,40 @@
+rule minimap2_ref_indexing:
+	input:
+		"../data/{ref_sample}.fna"
+	output:
+		"../minimap2-results/{ref_sample}.mmi"
+	shell:
+		"../minimap2/minimap2 -d {output} {input}"
+
+rule minimap2_mapping:
+	input:
+		"../minimap2-results/{ref_sample}.mmi",
+		"../data/{sample}.fastq"
+	output:
+		"../minimap2-results/{ref_sample}_{sample}.sam"
+	shell:
+		"../minimap2/minimap2 -a {input} > {output}"
+
+rule samtools_view:
+	input:
+		"../minimap2-results/{ref_sample}_{sample}.sam"
+	output:
+		"../samtools-results/{ref_sample}_{sample}.bam"
+	shell:
+		"../samtools-1.16.1/samtools view -S -b -o {output} {input}"	
+
+rule samtools_flagstat:
+	input:
+		"../samtools-results/{ref_sample}_{sample}.bam"
+	output:
+		"../samtools-results/{ref_sample}_{sample}.txt"
+	shell:
+		"../samtools-1.16.1/samtools flagstat {input} > {output}"
+
+rule parse_flagstat_result:
+	input:
+		"../samtools-results/{ref_sample}_{sample}.txt"
+	output:
+		"../{ref_sample}_{sample}_report.txt"
+	shell:
+		"../parse.py {input} > {output}"
