@@ -1,0 +1,12 @@
+Building DAG of jobs...
+WorkflowError:
+MissingInputException: Missing input files for rule minimap2_ref_indexing:
+    output: ../minimap2-results/../GCF_000005845.2_ASM584v2_genomic.mmi
+    wildcards: ref_sample=../GCF_000005845.2_ASM584v2_genomic
+    affected files:
+        ../data/../GCF_000005845.2_ASM584v2_genomic.fna
+MissingInputException: Missing input files for rule minimap2_ref_indexing:
+    output: ../minimap2-results/../GCF_000005845.2_ASM584v2_genomic.mmi
+    wildcards: ref_sample=../GCF_000005845.2_ASM584v2_genomic
+    affected files:
+        ../data/../GCF_000005845.2_ASM584v2_genomic.fna

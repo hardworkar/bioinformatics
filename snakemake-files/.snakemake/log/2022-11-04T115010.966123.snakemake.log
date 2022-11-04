@@ -1,0 +1,12 @@
+Building DAG of jobs...
+WorkflowError:
+MissingInputException: Missing input files for rule samtools_sort:
+    output: ../samtools-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.sorted.bam
+    wildcards: ref_sample=GCF_000005845.2_ASM584v2_genomic, sample=SRR12717711
+    affected files:
+        ../flagstat_result_is.ok
+MissingInputException: Missing input files for rule minimap2_mapping:
+    output: ../minimap2-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.sorted.sam
+    wildcards: ref_sample=GCF_000005845.2_ASM584v2_genomic, sample=SRR12717711.sorted
+    affected files:
+        ../data/SRR12717711.sorted.fastq

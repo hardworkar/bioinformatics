@@ -1,3 +1,14 @@
+rule clean:
+	shell:
+		"rm -f ../minimap2-results/* ../samtools-results/* ../*.vcf ../*.ok ../*.svg ../*.html"
+rule qc_report:
+	input:
+		"../data/{sample}.fastq"
+	output:
+		"../{sample}_qc_report.html"
+	shell:
+		"../FastQC/fastqc {input} ; mv ../data/{wildcards.sample}_fastqc.html ../{wildcards.sample}_qc_report.html"
+
 rule minimap2_ref_indexing:
 	input:
 		"../data/{ref_sample}.fna"
@@ -35,6 +46,24 @@ rule parse_flagstat_result:
 	input:
 		"../samtools-results/{ref_sample}_{sample}.txt"
 	output:
-		"../{ref_sample}_{sample}_report.txt"
+		"../{ref_sample}_{sample}_flagstat_result_is.ok"
 	shell:
-		"../parse.py {input} > {output}"
+		"../parse.py {input} ; [ -f ../flagstat_result_is.ok ] && mv ../flagstat_result_is.ok {output}"
+
+rule samtools_sort:
+	input:
+		"../{ref_sample}_{sample}_flagstat_result_is.ok",
+		"../samtools-results/{ref_sample}_{sample}.bam"
+	output:
+		"../samtools-results/{ref_sample}_{sample}.sortedbam"
+	shell:
+		"../samtools-1.16.1/samtools sort {input[1]} > {output}"
+
+rule freebayes:
+	input:
+		fna="../data/{ref_sample}.fna",
+		sorted="../samtools-results/{ref_sample}_{sample}.sortedbam"
+	output:
+		"../{ref_sample}_{sample}.vcf"
+	shell:
+		"freebayes -f {input.fna} {input.sorted} > {output}"

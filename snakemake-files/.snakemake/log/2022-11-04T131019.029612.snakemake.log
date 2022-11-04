@@ -1,0 +1,7 @@
+Building DAG of jobs...
+MissingInputException in rule samtools_sort  in line 53 of /home/ars/nsu/bioinformatics/snakemake-files/Snakefile:
+Missing input files for rule samtools_sort:
+    output: ../samtools-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.sortedbam
+    wildcards: ref_sample=GCF_000005845.2_ASM584v2_genomic, sample=SRR12717711
+    affected files:
+        ../flagstat_results_is.ok

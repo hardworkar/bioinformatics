@@ -1,0 +1,115 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                      count    min threads    max threads
+---------------------  -------  -------------  -------------
+freebayes                    1              1              1
+minimap2_mapping             1              1              1
+minimap2_ref_indexing        1              1              1
+parse_flagstat_result        1              1              1
+samtools_flagstat            1              1              1
+samtools_sort                1              1              1
+samtools_view                1              1              1
+total                        7              1              1
+
+Select jobs to execute...
+
+[Fri Nov  4 13:17:44 2022]
+rule minimap2_ref_indexing:
+    input: ../data/GCF_000005845.2_ASM584v2_genomic.fna
+    output: ../minimap2-results/GCF_000005845.2_ASM584v2_genomic.mmi
+    jobid: 6
+    reason: Missing output files: ../minimap2-results/GCF_000005845.2_ASM584v2_genomic.mmi
+    wildcards: ref_sample=GCF_000005845.2_ASM584v2_genomic
+    resources: tmpdir=/tmp
+
+[Fri Nov  4 13:17:44 2022]
+Finished job 6.
+1 of 7 steps (14%) done
+Select jobs to execute...
+
+[Fri Nov  4 13:17:44 2022]
+rule minimap2_mapping:
+    input: ../minimap2-results/GCF_000005845.2_ASM584v2_genomic.mmi, ../data/SRR12717711.fastq
+    output: ../minimap2-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.sam
+    jobid: 5
+    reason: Missing output files: ../minimap2-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.sam; Input files updated by another job: ../minimap2-results/GCF_000005845.2_ASM584v2_genomic.mmi
+    wildcards: ref_sample=GCF_000005845.2_ASM584v2_genomic, sample=SRR12717711
+    resources: tmpdir=/tmp
+
+[Fri Nov  4 13:17:45 2022]
+Finished job 5.
+2 of 7 steps (29%) done
+Select jobs to execute...
+
+[Fri Nov  4 13:17:45 2022]
+rule samtools_view:
+    input: ../minimap2-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.sam
+    output: ../samtools-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.bam
+    jobid: 4
+    reason: Missing output files: ../samtools-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.bam; Input files updated by another job: ../minimap2-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.sam
+    wildcards: ref_sample=GCF_000005845.2_ASM584v2_genomic, sample=SRR12717711
+    resources: tmpdir=/tmp
+
+[Fri Nov  4 13:17:46 2022]
+Finished job 4.
+3 of 7 steps (43%) done
+Select jobs to execute...
+
+[Fri Nov  4 13:17:46 2022]
+rule samtools_flagstat:
+    input: ../samtools-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.bam
+    output: ../samtools-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.txt
+    jobid: 3
+    reason: Missing output files: ../samtools-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.txt; Input files updated by another job: ../samtools-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.bam
+    wildcards: ref_sample=GCF_000005845.2_ASM584v2_genomic, sample=SRR12717711
+    resources: tmpdir=/tmp
+
+[Fri Nov  4 13:17:46 2022]
+Finished job 3.
+4 of 7 steps (57%) done
+Select jobs to execute...
+
+[Fri Nov  4 13:17:46 2022]
+rule parse_flagstat_result:
+    input: ../samtools-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.txt
+    output: ../GCF_000005845.2_ASM584v2_genomic_SRR12717711_flagstat_result_is.ok
+    jobid: 2
+    reason: Missing output files: ../GCF_000005845.2_ASM584v2_genomic_SRR12717711_flagstat_result_is.ok; Input files updated by another job: ../samtools-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.txt
+    wildcards: ref_sample=GCF_000005845.2_ASM584v2_genomic, sample=SRR12717711
+    resources: tmpdir=/tmp
+
+[Fri Nov  4 13:17:46 2022]
+Finished job 2.
+5 of 7 steps (71%) done
+Select jobs to execute...
+
+[Fri Nov  4 13:17:46 2022]
+rule samtools_sort:
+    input: ../GCF_000005845.2_ASM584v2_genomic_SRR12717711_flagstat_result_is.ok, ../samtools-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.bam
+    output: ../samtools-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.sortedbam
+    jobid: 1
+    reason: Missing output files: ../samtools-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.sortedbam; Input files updated by another job: ../samtools-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.bam, ../GCF_000005845.2_ASM584v2_genomic_SRR12717711_flagstat_result_is.ok; Set of input files has changed since last execution; Code has changed since last execution
+    wildcards: ref_sample=GCF_000005845.2_ASM584v2_genomic, sample=SRR12717711
+    resources: tmpdir=/tmp
+
+[Fri Nov  4 13:17:46 2022]
+Finished job 1.
+6 of 7 steps (86%) done
+Select jobs to execute...
+
+[Fri Nov  4 13:17:46 2022]
+rule freebayes:
+    input: ../data/GCF_000005845.2_ASM584v2_genomic.fna, ../samtools-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.sortedbam
+    output: ../GCF_000005845.2_ASM584v2_genomic_SRR12717711.vcf
+    jobid: 0
+    reason: Input files updated by another job: ../samtools-results/GCF_000005845.2_ASM584v2_genomic_SRR12717711.sortedbam
+    wildcards: ref_sample=GCF_000005845.2_ASM584v2_genomic, sample=SRR12717711
+    resources: tmpdir=/tmp
+
+[Fri Nov  4 13:19:40 2022]
+Finished job 0.
+7 of 7 steps (100%) done
+Complete log: .snakemake/log/2022-11-04T131744.515621.snakemake.log

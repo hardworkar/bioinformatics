@@ -1,0 +1,28 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job      count    min threads    max threads
+-----  -------  -------------  -------------
+clean        1              1              1
+total        1              1              1
+
+Select jobs to execute...
+
+[Fri Nov  4 12:55:52 2022]
+rule clean:
+    jobid: 0
+    reason: Rules with neither input nor output files are always executed.
+    resources: tmpdir=/tmp
+
+[Fri Nov  4 12:55:52 2022]
+Error in rule clean:
+    jobid: 0
+    shell:
+        rm ../minimap2-results/* ../samtools-results/*
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2022-11-04T125552.745143.snakemake.log

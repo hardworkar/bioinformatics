@@ -1,0 +1,3 @@
+SyntaxError:
+Not all output, log and benchmark files of rule parse_flagstat_result contain the same wildcards. This is crucial though, in order to avoid that two or more jobs write to the same file.
+  File "/home/ars/nsu/bioinformatics/snakemake-files/Snakefile", line 49, in <module>
